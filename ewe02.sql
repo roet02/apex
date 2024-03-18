@@ -33,7 +33,7 @@ prompt APPLICATION 103 - EWE02
 -- Application Export:
 --   Application:     103
 --   Name:            EWE02
---   Date and Time:   08:52 Friday March 15, 2024
+--   Date and Time:   12:55 Monday March 18, 2024
 --   Exported By:     EWE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -117,7 +117,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'EWE02'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240315085125'
+,p_last_upd_yyyymmddhh24miss=>'20240318082924'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
 ,p_print_server_type=>'NATIVE'
@@ -18216,7 +18216,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'13'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240315075019'
+,p_last_upd_yyyymmddhh24miss=>'20240318082924'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(15974855162264045)
@@ -18451,8 +18451,9 @@ wwv_flow_imp_page.create_report_region(
 ,p_query_type=>'SQL'
 ,p_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '--select distinct ''application'',regexp_replace(name,''Prod|Kon|Test|Entw|Ent'','''',1,0,''i'') "application"  from (select distinct name from bssrv) order by 2',
-'select distinct ''application'',regexp_replace(name,''\sProd|\sKon|\sTest|\sEntw|\sEnt'','''',1,0,''i'') "application"  from (select distinct name from bssrv ) ',
-'where name like ''%''||:P1_ASEARCH||''%''',
+'select distinct ''application'',regexp_replace(name,''\sProd|\sKon|\sTest|\sInt|\sEntw|\sEnt'','''',1,0,''i'') "application"  from (select distinct name from bssrv ) ',
+'--where name like ''%''||:P1_ASEARCH||''%''',
+'where name like ''%''||nvl(:P1_ASEARCH,name)||''%''',
 'order by 2'))
 ,p_ajax_enabled=>'Y'
 ,p_lazy_loading=>false
@@ -18669,7 +18670,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240229120140'
+,p_last_upd_yyyymmddhh24miss=>'20240315125043'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(35241983170383837)
@@ -18777,7 +18778,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_plug_id=>wwv_flow_imp.id(35241983170383837)
 ,p_button_name=>'CREATE'
 ,p_button_action=>'REDIRECT_PAGE'
-,p_button_template_options=>'#DEFAULT#'
+,p_button_template_options=>'#DEFAULT#:t-Button--small'
 ,p_button_template_id=>wwv_flow_imp.id(35086563305139080)
 ,p_button_image_alt=>'NEW'
 ,p_button_position=>'PREVIOUS'
@@ -18790,7 +18791,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_plug_id=>wwv_flow_imp.id(35241983170383837)
 ,p_button_name=>'Reset'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#'
+,p_button_template_options=>'#DEFAULT#:t-Button--small'
 ,p_button_template_id=>wwv_flow_imp.id(35086563305139080)
 ,p_button_image_alt=>'Reset'
 ,p_button_position=>'PREVIOUS'
