@@ -33,7 +33,7 @@ prompt APPLICATION 103 - EWE02
 -- Application Export:
 --   Application:     103
 --   Name:            EWE02
---   Date and Time:   12:53 Monday March 25, 2024
+--   Date and Time:   11:43 Wednesday March 27, 2024
 --   Exported By:     EWE
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -101,7 +101,7 @@ wwv_imp_workspace.create_flow(
 ,p_direction_right_to_left=>'N'
 ,p_flow_image_prefix => nvl(wwv_flow_application_install.get_image_prefix,'')
 ,p_authentication_id=>wwv_flow_imp.id(34909717732138934)
-,p_application_tab_set=>1
+,p_application_tab_set=>0
 ,p_logo_type=>'T'
 ,p_logo_text=>'EWE02'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
@@ -117,7 +117,7 @@ wwv_imp_workspace.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'EWE02'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240325125246'
+,p_last_upd_yyyymmddhh24miss=>'20240327114159'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>6
 ,p_print_server_type=>'NATIVE'
@@ -1118,6 +1118,12 @@ wwv_flow_imp_shared.create_static_lov_data(
 ,p_lov_disp_sequence=>3
 ,p_lov_disp_value=>'MIGRATED'
 ,p_lov_return_value=>'MIGRATED'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(42677835172227278)
+,p_lov_disp_sequence=>4
+,p_lov_disp_value=>'WORKING'
+,p_lov_return_value=>'WORKING'
 );
 end;
 /
@@ -18250,7 +18256,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'13'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240318082924'
+,p_last_upd_yyyymmddhh24miss=>'20240327114032'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(15974855162264045)
@@ -18442,6 +18448,19 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_assigned_to_y2=>'off'
 ,p_items_label_rendered=>false
 );
+wwv_flow_imp_page.create_jet_chart_series(
+ p_id=>wwv_flow_imp.id(28884524410167244)
+,p_chart_id=>wwv_flow_imp.id(15974995928264046)
+,p_seq=>130
+,p_name=>'WORKING'
+,p_data_source_type=>'SQL'
+,p_data_source=>'select ''components'',count(*) from comp where status=''WORKING'''
+,p_items_value_column_name=>'COUNT(*)'
+,p_items_label_column_name=>'''COMPONENTS'''
+,p_color=>'#ff9500'
+,p_assigned_to_y2=>'off'
+,p_items_label_rendered=>false
+);
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(15975159121264048)
 ,p_chart_id=>wwv_flow_imp.id(15974995928264046)
@@ -18538,6 +18557,7 @@ wwv_flow_imp_page.create_report_region(
 '       WHEN STATUS = ''OPEN''  THEN ''#ff3b30''',
 '       WHEN STATUS = ''READY'' THEN ''#4cd964''',
 '       WHEN STATUS = ''MIGRATED'' THEN ''#5856d6''',
+'       WHEN STATUS = ''WORKING'' THEN ''#ff9500''',
 '       END AS COLOR_STATUS',
 'from host h',
 'inner JOIN comp c',
@@ -19734,7 +19754,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240319084637'
+,p_last_upd_yyyymmddhh24miss=>'20240327114058'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(35714974585166988)
@@ -19751,6 +19771,7 @@ wwv_flow_imp_page.create_report_region(
 '       WHEN STATUS = ''OPEN''  THEN ''RED''',
 '       WHEN STATUS = ''READY'' THEN ''GREEN''',
 '       WHEN STATUS = ''MIGRATED'' THEN ''BLUE''',
+'       WHEN STATUS = ''WORKING'' THEN ''#ff9500''',
 '       END AS COLOR_STATUS',
 'from comp',
 'where ( name like ''%''|| nvl(:P7_SEARCH,name)||''%'' or  hname   like ''%''||:P7_SEARCH||''%'' )',
@@ -19792,7 +19813,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>2
 ,p_column_heading=>'Name'
 ,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<span style="color:#COLOR_STATUS#;font=weight:bold">#NAME# </span>'
+,p_column_html_expression=>'<span style="color:#COLOR_STATUS#;font-weight:bold">#NAME# </span>'
 ,p_heading_alignment=>'LEFT'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
@@ -19988,6 +20009,7 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
+,p_page_component_map=>'02'
 ,p_last_updated_by=>'EWE'
 ,p_last_upd_yyyymmddhh24miss=>'20240325125246'
 );
@@ -21315,7 +21337,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240319085832'
+,p_last_upd_yyyymmddhh24miss=>'20240327070221'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(35744896266631906)
@@ -21650,7 +21672,7 @@ wwv_flow_imp_page.create_page(
 ,p_protection_level=>'C'
 ,p_page_component_map=>'03'
 ,p_last_updated_by=>'EWE'
-,p_last_upd_yyyymmddhh24miss=>'20240319093401'
+,p_last_upd_yyyymmddhh24miss=>'20240327114159'
 );
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(35810335772581480)
@@ -21668,6 +21690,7 @@ wwv_flow_imp_page.create_report_region(
 '       WHEN STATUS = ''OPEN''  THEN ''RED''',
 '       WHEN STATUS = ''READY'' THEN ''GREEN''',
 '       WHEN STATUS = ''MIGRATED'' THEN ''BLUE''',
+'       WHEN STATUS = ''WORKING'' THEN ''#ff9500''',
 '       END AS COLOR_STATUS',
 'from host h',
 'inner JOIN comp c',
@@ -21723,7 +21746,7 @@ wwv_flow_imp_page.create_report_columns(
 ,p_column_display_sequence=>30
 ,p_column_heading=>'Component'
 ,p_use_as_row_header=>'N'
-,p_column_html_expression=>'<span style="color:#COLOR_STATUS#;font=weight:bold">#Component# </span>'
+,p_column_html_expression=>'<span style="color:#COLOR_STATUS#;font-weight:bold">#Component# </span>'
 ,p_heading_alignment=>'LEFT'
 ,p_disable_sort_column=>'N'
 ,p_derived_column=>'N'
